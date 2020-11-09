@@ -1,2 +1,2 @@
-# sharifjs-framework
+# SharifJS-framework
 NodeJS framework project
