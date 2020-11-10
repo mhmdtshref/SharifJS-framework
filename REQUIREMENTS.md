@@ -15,4 +15,5 @@ Each request should have it's own data validation
 - `CMD` feature:
 This is the most important feature, we should be able to create `controllers` and `models` using the command-line, the file should be created with a standard-structure.
 
-- Create a model with it's router, controller, model itself, and data access layer, all of these in one command in the cmd
+- Create a model with it's router, controller, model itself, and data access layer, all of these in one command in the `cmd`
+- Create app from CMD using one command with options
