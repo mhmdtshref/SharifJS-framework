@@ -44,5 +44,6 @@ export class FolderName {
 }
 ```
 ## Framework method of import/export
+Export using `export default [SOMETHING]` is not in our style of code, we always use `export class` to export, unless it's not an `enum`, `type` or `interface`. Regarding import, we use `import { ClassName } from './filename';`, that's because we never use `export default`.
 ## Framework method of define functions
 ## Framework method of documenting
