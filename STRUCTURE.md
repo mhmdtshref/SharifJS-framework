@@ -40,7 +40,7 @@ Also, `index.ts` functions should be like:
 import { ClassName } from '[FILE_PATH]';
 
 export class FolderName {
-    protected fileName = new FileName();
+    protected className = new ClassName();
 }
 ```
 ## Framework method of import/export
