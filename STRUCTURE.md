@@ -1,7 +1,7 @@
 # Framework structure:
 ## Framework files skeleton
 The files tree inside `src` directory:
-```bash
+```tree
 .
 ├── constants
 │   ├── index.ts
@@ -24,10 +24,9 @@ The files tree inside `src` directory:
 ├── routes
 │   ├── index.ts
 │   └── user.route.ts
-├── validators
-│   ├── index.ts
-│   └── user.validator.ts
-.
+└── validators
+    ├── index.ts
+    └── user.validator.ts
 ```
 ## Framework files structure
 ## Framework method of import/export
