@@ -29,6 +29,20 @@ The files tree inside `src` directory:
     └── user.validator.ts
 ```
 ## Framework files structure
+functionial files structure should be like:
+```typescript
+export class ClassName {
+// Create functions and variables (private, public or protected)
+}
+```
+Also, `index.ts` functions should be like:
+```typescript
+import { ClassName } from '[FILE_PATH]';
+
+export class FolderName {
+    protected fileName = new FileName();
+}
+```
 ## Framework method of import/export
 ## Framework method of define functions
 ## Framework method of documenting
