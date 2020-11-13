@@ -55,3 +55,25 @@ funcName = (): ReturnedInterfaceOrClass => {
 - Function name should be typed in camelCase
 - No functions outside classes
 ## Framework method of documenting
+Document for functions, example:
+```typescript
+/**
+ * @memberof {ClassName}
+ * @description Add two numbers together
+ * @param  {number} num1 The first number
+ * @param  {number} num2 The second number
+ * @return {number}      The total of the two numbers
+ */
+ funcName = (num1: number, num2: number): number => {
+    return num1 + num2;
+ }
+```
+Also, for classes:
+```
+/**
+ * @memberof {ClassName}
+ * @description [WHAT BENEFITS OF THIS CLASS?]
+ */
+export class ClassName {
+}
+```
