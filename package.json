@@ -1,0 +1,19 @@
+{
+  "name": "sharifjs-started-app",
+  "version": "1.0.0",
+  "description": "SharifJS framework starter app",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhmdtshref/SharifJS-framework.git"
+  },
+  "author": "mohamed sharif",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mhmdtshref/SharifJS-framework/issues"
+  },
+  "homepage": "https://github.com/mhmdtshref/SharifJS-framework#readme"
+}
