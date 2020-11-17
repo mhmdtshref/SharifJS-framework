@@ -4,7 +4,9 @@
   "description": "SharifJS framework starter app",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "tsc",
+    "serve": "ts-node-dev --respawn ./src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,13 @@
   },
   "homepage": "https://github.com/mhmdtshref/SharifJS-framework#readme",
   "devDependencies": {
+    "@types/cors": "^2.8.8",
     "@types/node": "^14.14.7",
+    "ts-node-dev": "^1.0.0",
     "typescript": "^4.0.5"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
   }
 }
