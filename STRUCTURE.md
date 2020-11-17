@@ -18,6 +18,9 @@ The files tree inside `src` directory:
 ├── interfaces
 │   ├── index.ts
 │   └── user.interface.ts
+├── middlewares
+│   ├── index.ts
+│   └── user.middleware.ts
 ├── models
 │   ├── index.ts
 │   └── user.model.ts
