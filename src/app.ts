@@ -1,6 +1,7 @@
 import cors from 'cors';
 import express, { Application } from 'express';
 import { AppConstants } from './constants';
+import { AppRouter } from './routers';
 
 export class ExpressApp {
 
@@ -10,19 +11,23 @@ export class ExpressApp {
 
     constructor () {
         this.app = express();
+        this.setCors();
+        this.setSettings();
+        this.setRouters();
     }
 
-    setCors = () => {
-        this.app.use(cors);
+    private setCors = () => {
+        this.app.use(cors());
     }
 
-    setSettings = () => {
+    private setSettings = () => {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
     }
 
-    setRouters = () => {
+    private setRouters = () => {
         const { context, version } = this.appConstants;
-        this.app.use(`/${context}/${version}`);
+        const { router } = new AppRouter();
+        this.app.use(`/${context}/${version}`, router);
     }
 }
