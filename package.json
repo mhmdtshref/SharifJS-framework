@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/mhmdtshref/SharifJS-framework/issues"
   },
-  "homepage": "https://github.com/mhmdtshref/SharifJS-framework#readme"
+  "homepage": "https://github.com/mhmdtshref/SharifJS-framework#readme",
+  "devDependencies": {
+    "@types/node": "^14.14.7",
+    "typescript": "^4.0.5"
+  }
 }
