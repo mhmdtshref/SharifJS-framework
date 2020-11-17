@@ -4,30 +4,29 @@ import { AppConstants } from './constants';
 import { AppRouter } from './routers';
 
 export class ExpressApp {
+  app: Application;
 
-    app: Application;
+  private appConstants = new AppConstants();
 
-    private appConstants = new AppConstants();
+  constructor() {
+    this.app = express();
+    this.setCors();
+    this.setSettings();
+    this.setRouters();
+  }
 
-    constructor () {
-        this.app = express();
-        this.setCors();
-        this.setSettings();
-        this.setRouters();
-    }
+  private setCors = () => {
+    this.app.use(cors());
+  };
 
-    private setCors = () => {
-        this.app.use(cors());
-    }
+  private setSettings = () => {
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
+  };
 
-    private setSettings = () => {
-        this.app.use(express.json());
-        this.app.use(express.urlencoded({ extended: true }));
-    }
-
-    private setRouters = () => {
-        const { context, version } = this.appConstants;
-        const { router } = new AppRouter();
-        this.app.use(`/${context}/${version}`, router);
-    }
+  private setRouters = () => {
+    const { context, version } = this.appConstants;
+    const { router } = new AppRouter();
+    this.app.use(`/${context}/${version}`, router);
+  };
 }
