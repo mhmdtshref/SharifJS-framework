@@ -1,5 +1,5 @@
 import { DataTypes, Model, STRING } from 'sequelize';
-import { UserModelConstants } from 'src/constants';
+import { UserModelConstants } from '../constants';
 import { SequelizeConfig } from './sequelize';
 
 const userModelConstants = new UserModelConstants();
