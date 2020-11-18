@@ -3,3 +3,6 @@ node_modules/
 
 # typescript output directory
 build/
+
+#ignore environment file
+.env

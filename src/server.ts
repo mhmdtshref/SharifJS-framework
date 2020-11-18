@@ -1,5 +1,11 @@
 import { Server as HttpServer } from 'http';
 import { Application } from 'express';
+import { EnvConstants } from './constants';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const { port, host } = new EnvConstants();
 
 export class Server {
   private server: HttpServer;
@@ -13,8 +19,8 @@ export class Server {
   };
 
   private listen = (): void => {
-    this.server.listen(5000, (): void => {
-      console.log(`Server is running on http://localhost:5000/`);
+    this.server.listen(port, (): void => {
+      console.log(`Server is running on  ${host}:${port}`);
     });
   };
 }
