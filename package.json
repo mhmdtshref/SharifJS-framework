@@ -47,6 +47,8 @@
     "dotenv": "^8.2.0",
     "eslint-config-prettier": "^6.15.0",
     "express": "^4.17.1",
+    "http-status-codes": "^2.1.4",
+    "pg": "^8.5.1",
     "sequelize": "^6.3.5"
   }
 }

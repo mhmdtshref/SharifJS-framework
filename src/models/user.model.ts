@@ -1,9 +1,8 @@
 import { DataTypes, Model, STRING } from 'sequelize';
-import { UserModelConstants } from '../constants';
-import { SequelizeConfig } from './sequelize';
+import { UserModelConstants, SequelizeConstant } from '../constants';
 
 const userModelConstants = new UserModelConstants();
-const { sequelize } = new SequelizeConfig();
+const { sequelize } = SequelizeConstant;
 
 export class User extends Model {
   id!: number;
