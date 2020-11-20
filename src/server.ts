@@ -23,6 +23,6 @@ export class Server {
   };
 
   databaseSync = () => {
-    return sequelize.authenticate().then(() => sequelize.sync({ force: true }));
+    return sequelize.authenticate().then(() => sequelize.sync());
   };
 }
