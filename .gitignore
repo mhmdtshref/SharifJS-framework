@@ -6,3 +6,6 @@ build/
 
 #ignore environment file
 .env
+
+# VS Code editor
+.vscode/
