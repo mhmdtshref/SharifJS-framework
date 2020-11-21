@@ -9,7 +9,7 @@ export class AuthRouter {
   router = Router();
 
   constructor() {
-      this.router.post('/register', [encrypt], authController.register);
-      this.router.post('/login', authController.login);
+    this.router.post('/register', [encrypt], authController.register);
+    this.router.post('/login', authController.login);
   }
 }
