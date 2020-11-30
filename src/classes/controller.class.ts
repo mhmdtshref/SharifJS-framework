@@ -9,7 +9,7 @@ export const controllerClassGenerator = (model: any) => {
     index = (_request: Request, response: Response) => {
       (model.findAll() as Promise<Model[]>)
         .then((data) => {
-          responseHandler.ok(response, data, 'Data retrieved successfully');
+          responseHandler.ok(response, data, `${model.pluralClassName} retrieved successfully`);
         })
         .catch((error) => {
           responseHandler.badRequest(response, error);
@@ -21,13 +21,13 @@ export const controllerClassGenerator = (model: any) => {
       (model.findByPk(id) as Promise<Model | null>)
         .then((row) => {
           if (row) {
-            return responseHandler.ok(response, row, 'Record retrieved successfully');
+            return responseHandler.ok(response, row, `${model.className} retrieved successfully`);
           } else {
-            return responseHandler.notFound(response, 'Record not found');
+            return responseHandler.notFound(response, `${model.className} not found`);
           }
         })
-        .catch(() => {
-          responseHandler.internalServerError(response);
+        .catch((error: Error) => {
+          responseHandler.internalServerError(response, error);
         });
     };
 
@@ -35,7 +35,7 @@ export const controllerClassGenerator = (model: any) => {
       const data = _.pick(request.body, Object.keys(model.rawAttributes));
       (model.create(data) as Promise<Model>)
         .then((record) => {
-          responseHandler.created(response, record, 'Record created successfully');
+          responseHandler.created(response, record, `${model.className} created successfully`);
         })
         .catch((error: Error) => {
           responseHandler.badRequest(response, error);
@@ -49,14 +49,14 @@ export const controllerClassGenerator = (model: any) => {
         .then((record) => {
           if (record) {
             return record.update(data).then((data) => {
-              responseHandler.ok(response, data, 'Record updated successfully');
+              responseHandler.ok(response, data, `${model.className} updated successfully`);
             });
           } else {
-            return responseHandler.notFound(response, 'Record not found');
+            return responseHandler.notFound(response, `${model.className} not found`);
           }
         })
-        .catch(() => {
-          responseHandler.internalServerError(response);
+        .catch((error: Error) => {
+          responseHandler.internalServerError(response, error);
         });
     };
 
@@ -66,14 +66,14 @@ export const controllerClassGenerator = (model: any) => {
         .then((record) => {
           if (record) {
             return record.destroy().then(() => {
-              responseHandler.ok(response, null, 'Record deleted successfully');
+              responseHandler.ok(response, null, `${model.className} deleted successfully`);
             });
           } else {
-            return responseHandler.notFound(response, 'Record not found');
+            return responseHandler.notFound(response, `${model.className} not found`);
           }
         })
-        .catch(() => {
-          responseHandler.internalServerError(response);
+        .catch((error: Error) => {
+          responseHandler.internalServerError(response, error);
         });
     };
   };

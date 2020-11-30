@@ -53,6 +53,7 @@
     "http-status-codes": "^2.1.4",
     "lodash": "^4.17.20",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "winston": "^3.3.3"
   }
 }
