@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import * as httpStatusCodes from 'http-status-codes';
+import { Logger } from '../logger';
 
 const { StatusCodes: codes } = httpStatusCodes;
 
@@ -38,6 +39,7 @@ export class ResponseHandler {
         response.status(codes.OK).json(new SuccessResponse(data, message || 'Operation succeeded'));
       })
       .catch((error: ErrorParam) => {
+        Logger.errorLogger(error);
         this.badRequest(response, error);
       });
   };
@@ -48,19 +50,23 @@ export class ResponseHandler {
         response.status(codes.CREATED).json(new SuccessResponse(data, message || 'Create operation succeeded'));
       })
       .catch((error: ErrorParam) => {
+        Logger.errorLogger(error);
         this.badRequest(response, error);
       });
   };
 
   badRequest = (response: Response, error: ErrorParam) => {
+    Logger.errorLogger(error);
     response.status(codes.BAD_REQUEST).json(new ErrorResponse(error));
   };
 
   notFound = (response: Response, error: ErrorParam) => {
+    Logger.errorLogger(error);
     response.status(codes.NOT_FOUND).json(new ErrorResponse(error));
   };
 
-  internalServerError = (response: Response) => {
+  internalServerError = (response: Response, error: Error) => {
+    Logger.errorLogger(error);
     response.status(codes.INTERNAL_SERVER_ERROR).json(new ErrorResponse('Internal server error'));
   };
 

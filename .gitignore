@@ -9,3 +9,6 @@ build/
 
 # VS Code editor
 .vscode/
+
+#logs files
+*.logs

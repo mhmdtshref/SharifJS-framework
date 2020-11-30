@@ -1,16 +1,20 @@
 import { DataTypes, Model, STRING } from 'sequelize';
+import { IModel } from '../interfaces';
 import { UserModelConstants, SequelizeConstant } from '../constants';
 
 const userModelConstants = new UserModelConstants();
 const { sequelize } = SequelizeConstant;
 
-export class User extends Model {
+export class User extends Model implements IModel {
   id!: number;
   email!: string;
   firstName!: string;
   lastName!: string;
   password!: string;
   birthdate!: Date;
+
+  className = 'User';
+  pluralClassName = 'Users';
 }
 
 User.init(

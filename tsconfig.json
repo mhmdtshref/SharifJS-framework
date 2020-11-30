@@ -73,7 +73,8 @@
     "dist",
     "build",
     ".nyc_output",
-    ".coverage"
+    ".coverage",
+    ".logs"
   ],
   "parserOptions": {
     "debugLevel": true

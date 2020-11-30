@@ -33,8 +33,8 @@ export class AuthController {
           responseHandler.notFound(response, 'No user found with sent email');
         }
       })
-      .catch(() => {
-        responseHandler.internalServerError(response);
+      .catch((error: Error) => {
+        responseHandler.internalServerError(response, error);
       });
   };
 }
