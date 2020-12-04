@@ -70,6 +70,11 @@ export class ResponseHandler {
     response.status(codes.INTERNAL_SERVER_ERROR).json(new ErrorResponse('Internal server error'));
   };
 
+  unAuthorized = (response: Response, error: ErrorParam) => {
+    Logger.errorLogger(error);
+    response.status(codes.UNAUTHORIZED).json(new ErrorResponse(error));
+  };
+
   private resolveSuccessPromise = (data: DataParam) => {
     if (data instanceof Promise) {
       return data as Promise<unknown>;
