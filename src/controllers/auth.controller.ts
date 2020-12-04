@@ -9,14 +9,16 @@ import { Cookie } from 'src/interfaces';
 const responseHandler = new ResponseHandler();
 
 export class AuthController {
+
+  private expirationDate = moment().add(1, 'year').toDate();
+
   register = (request: Request, response: Response) => {
     const data = _.pick(request.body, Object.keys(User.rawAttributes));
     User.create(data)
       .then((user) => {
         // Token settings and generation
         const payload = user.id.toString();
-        const expirationDate = moment().add(1, 'year').toDate();
-        const token = TokenUtil.generate(payload, expirationDate);
+        const token = TokenUtil.generate(payload, this.expirationDate);
 
         // Cookies set to response
         const cookies: Cookie[] = [{ name: 'token', value: token, httpOnly: true }];
@@ -37,7 +39,15 @@ export class AuthController {
         if (user) {
           return new EncryptionUtil().compareHash(password, user.password).then((passed) => {
             if (passed) {
-              responseHandler.ok(response, 'Login success');
+              // Token settings and generation
+              const payload = user.id.toString();
+              const token = TokenUtil.generate(payload, this.expirationDate);
+
+              // Cookies set to response
+              const cookies: Cookie[] = [{ name: 'token', value: token, httpOnly: true }];
+              const cookiedResponse = CookiesUtil.setCookies(response, cookies);
+
+              responseHandler.ok(cookiedResponse, 'Login success');
             } else {
               responseHandler.badRequest(response, 'Incorrect password');
             }
