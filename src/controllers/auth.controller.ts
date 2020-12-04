@@ -9,7 +9,6 @@ import { Cookie } from 'src/interfaces';
 const responseHandler = new ResponseHandler();
 
 export class AuthController {
-
   private expirationDate = moment().add(1, 'year').toDate();
 
   register = (request: Request, response: Response) => {
