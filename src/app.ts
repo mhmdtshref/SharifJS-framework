@@ -2,6 +2,7 @@ import cors from 'cors';
 import express, { Application } from 'express';
 import { AppConstants } from './constants';
 import { AppRouter } from './routers';
+import cookieParser from 'cookie-parser';
 
 export class ExpressApp {
   app: Application;
@@ -22,6 +23,7 @@ export class ExpressApp {
   private setSettings = () => {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(cookieParser());
   };
 
   private setRouters = () => {

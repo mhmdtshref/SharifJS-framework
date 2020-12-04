@@ -27,6 +27,7 @@
   "homepage": "https://github.com/mhmdtshref/SharifJS-framework#readme",
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
+    "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.8",
     "@types/lodash": "^4.14.165",
     "@types/node": "^14.14.7",
@@ -47,6 +48,7 @@
   "dependencies": {
     "@types/jsonwebtoken": "^8.5.0",
     "bcrypt": "^5.0.0",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "eslint-config-prettier": "^6.15.0",
