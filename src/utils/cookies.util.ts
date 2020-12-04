@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { Cookie } from 'src/interfaces';
 import _ from 'lodash';
 
@@ -9,5 +9,9 @@ export class CookiesUtil {
       response.cookie(currentCookie.name, currentCookie.value, options);
     });
     return response;
+  };
+
+  static getCookies = (request: Request) => {
+    return request.cookies;
   };
 }
