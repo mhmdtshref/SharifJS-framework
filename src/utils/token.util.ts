@@ -15,5 +15,16 @@ export class TokenUtil {
     return token;
   };
 
-  static confirm = () => {};
+  static confirm = (token: string, secretKeyParam?: string) => {
+    const secretKey = secretKeyParam || (EnvConstants.token.secretKey as Secret);
+    return new Promise((resolve, reject) => {
+      jsonWebToken.verify(token, secretKey, (error, decoded) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(decoded);
+        }
+      });
+    });
+  };
 }
