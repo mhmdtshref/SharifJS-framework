@@ -3,6 +3,8 @@ import _ from 'lodash';
 import { EncryptionUtil, ResponseHandler, TokenUtil } from '../utils';
 import { User } from '../models';
 import moment from 'moment';
+import { CookiesUtil } from 'src/utils';
+import { Cookie } from 'src/interfaces';
 
 const responseHandler = new ResponseHandler();
 
@@ -11,10 +13,17 @@ export class AuthController {
     const data = _.pick(request.body, Object.keys(User.rawAttributes));
     User.create(data)
       .then((user) => {
+        // Token settings and generation
         const payload = user.id.toString();
         const expirationDate = moment().add(1, 'year').toDate();
         const token = TokenUtil.generate(payload, expirationDate);
-        responseHandler.created(response, user, 'User created successfully');
+
+        // Cookies set to response
+        const cookies: Cookie[] = [{ name: 'token', value: token, httpOnly: true }];
+        const cookiedResponse = CookiesUtil.setCookies(response, cookies);
+
+        // Send response carrying response
+        responseHandler.created(cookiedResponse, user, 'User created successfully');
       })
       .catch((error: Error) => {
         responseHandler.badRequest(response, error);
