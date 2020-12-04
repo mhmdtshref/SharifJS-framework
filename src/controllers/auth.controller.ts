@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import _ from 'lodash';
-import { EncryptionUtil, ResponseHandler } from '../utils';
+import { EncryptionUtil, ResponseHandler, TokenUtil } from '../utils';
 import { User } from '../models';
+import moment from 'moment';
 
 const responseHandler = new ResponseHandler();
 
@@ -9,8 +10,11 @@ export class AuthController {
   register = (request: Request, response: Response) => {
     const data = _.pick(request.body, Object.keys(User.rawAttributes));
     User.create(data)
-      .then((record) => {
-        responseHandler.created(response, record, 'User record created successfully');
+      .then((user) => {
+        const payload = user.id.toString();
+        const expirationDate = moment().add(1, 'year').toDate();
+        const token = TokenUtil.generate(payload, expirationDate);
+        responseHandler.created(response, user, 'User created successfully');
       })
       .catch((error: Error) => {
         responseHandler.badRequest(response, error);

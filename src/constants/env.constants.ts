@@ -1,7 +1,7 @@
 const env = process.env;
 
 export class EnvConstants {
-  private static requiredConstantsList = ['DATABASE_URL', 'HOST', 'ENCRYPTION_SALT_ROUNDS'];
+  private static requiredConstantsList = ['DATABASE_URL', 'HOST', 'TOKEN_SECRET_KEY'];
 
   static database = {
     url: env.DATABASE_URL as string,
@@ -10,6 +10,11 @@ export class EnvConstants {
   static server = {
     host: env.HOST as string,
     port: env.PORT || 5000,
+  };
+
+  static token = {
+    algorithm: env.TOKEN_ALGORITHM || 'RS256',
+    secretKey: env.TOKEN_SECRET_KEY,
   };
 
   static encryption = {
