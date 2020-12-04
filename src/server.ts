@@ -3,7 +3,7 @@ import { Application } from 'express';
 import { EnvConstants } from './constants';
 import { sequelize } from './models';
 
-const { port, host } = new EnvConstants();
+const { port, host } = EnvConstants.server;
 
 export class Server {
   private server: HttpServer;

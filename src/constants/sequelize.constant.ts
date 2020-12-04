@@ -1,7 +1,8 @@
 import { Sequelize } from 'sequelize';
 import { EnvConstants } from '../constants';
 
-const { url } = new EnvConstants().database;
+const { url } = EnvConstants.database;
+
 export class SequelizeConstant {
   static readonly underscored: boolean = false;
   static readonly timestamps: boolean = true;
