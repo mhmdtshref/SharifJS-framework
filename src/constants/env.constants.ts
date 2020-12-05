@@ -13,7 +13,6 @@ export class EnvConstants {
   };
 
   static token = {
-    algorithm: env.TOKEN_ALGORITHM || 'RS256',
     secretKey: env.TOKEN_SECRET_KEY,
   };
 

@@ -1,18 +1,20 @@
-import jsonWebToken, { Secret, Algorithm } from 'jsonwebtoken';
+import jsonWebToken, { Secret } from 'jsonwebtoken';
 import { EnvConstants } from '../constants';
-import moment from 'moment';
 
 export class TokenUtil {
-  static generate = (payload: string | object | Buffer, expirationDateParam?: Date, secretKeyParam?: Secret) => {
+  static generate = (payload: string | object | Buffer, secretKeyParam?: Secret) => {
     // Define settings
-    const expirationDate = moment(expirationDateParam || moment().add(1, 'year'));
-    const expiresIn = expirationDate.diff(moment(), 'seconds');
-    const algorithm: Algorithm = EnvConstants.token.algorithm as Algorithm;
     const secretKey = secretKeyParam || (EnvConstants.token.secretKey as Secret);
-
     // Generate token
-    const token = jsonWebToken.sign(payload, secretKey, { expiresIn, algorithm });
-    return token;
+    return new Promise((resolve, reject) => {
+      jsonWebToken.sign(payload, secretKey, (error, token) => {
+        if (error || !token) {
+          reject(error || new Error('Sign token return undefined'));
+        } else {
+          resolve(token as string);
+        }
+      });
+    });
   };
 
   static confirm = (token: string, secretKeyParam?: string) => {

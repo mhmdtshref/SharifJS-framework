@@ -1,30 +1,26 @@
 import { Request, Response } from 'express';
 import _ from 'lodash';
-import { EncryptionUtil, ResponseHandler, TokenUtil } from '../utils';
+import { EncryptionUtil, ResponseHandler, TokenUtil, CookiesUtil } from '../utils';
 import { User } from '../models';
-import moment from 'moment';
-import { CookiesUtil } from 'src/utils';
-import { Cookie } from 'src/interfaces';
+import { Cookie } from '../interfaces';
 
 const responseHandler = new ResponseHandler();
 
 export class AuthController {
-  private expirationDate = moment().add(1, 'year').toDate();
-
   register = (request: Request, response: Response) => {
     const data = _.pick(request.body, Object.keys(User.rawAttributes));
     User.create(data)
       .then((user) => {
         // Token settings and generation
         const payload = user.id.toString();
-        const token = TokenUtil.generate(payload, this.expirationDate);
+        return TokenUtil.generate(payload).then((token) => {
+          // Cookies set to response
+          const cookies: Cookie[] = [{ name: 'token', value: token, httpOnly: true }];
+          const cookiedResponse = CookiesUtil.setCookies(response, cookies);
 
-        // Cookies set to response
-        const cookies: Cookie[] = [{ name: 'token', value: token, httpOnly: true }];
-        const cookiedResponse = CookiesUtil.setCookies(response, cookies);
-
-        // Send response carrying response
-        responseHandler.created(cookiedResponse, user, 'User created successfully');
+          // Send response carrying response
+          responseHandler.created(cookiedResponse, user, 'User created successfully');
+        });
       })
       .catch((error: Error) => {
         responseHandler.badRequest(response, error);
@@ -40,7 +36,7 @@ export class AuthController {
             if (passed) {
               // Token settings and generation
               const payload = user.id.toString();
-              const token = TokenUtil.generate(payload, this.expirationDate);
+              const token = TokenUtil.generate(payload);
 
               // Cookies set to response
               const cookies: Cookie[] = [{ name: 'token', value: token, httpOnly: true }];

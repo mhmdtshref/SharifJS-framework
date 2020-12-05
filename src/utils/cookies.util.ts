@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { Cookie } from 'src/interfaces';
 import _ from 'lodash';
+import { Cookie } from '../interfaces';
 
 export class CookiesUtil {
   static setCookies = (response: Response, cookiesList: Cookie[]) => {
