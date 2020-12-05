@@ -20,4 +20,7 @@ export class UserModelConstants {
   birthdate = {
     isDateError: `Birthdate is not valid date`,
   };
+
+  passwordMinLength = 8;
+  passwordMaxLength = 120;
 }
