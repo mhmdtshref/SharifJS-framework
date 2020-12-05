@@ -36,13 +36,13 @@ export class AuthController {
             if (passed) {
               // Token settings and generation
               const payload = user.id.toString();
-              const token = TokenUtil.generate(payload);
+              return TokenUtil.generate(payload).then((token) => {
+                // Cookies set to response
+                const cookies: Cookie[] = [{ name: 'token', value: token, httpOnly: true }];
+                const cookiedResponse = CookiesUtil.setCookies(response, cookies);
 
-              // Cookies set to response
-              const cookies: Cookie[] = [{ name: 'token', value: token, httpOnly: true }];
-              const cookiedResponse = CookiesUtil.setCookies(response, cookies);
-
-              responseHandler.ok(cookiedResponse, 'Login success');
+                responseHandler.ok(cookiedResponse, 'Login success');
+              });
             } else {
               responseHandler.badRequest(response, 'Incorrect password');
             }
