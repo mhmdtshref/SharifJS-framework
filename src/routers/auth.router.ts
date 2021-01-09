@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { PasswordMiddleware } from '../middlewares';
 import { AuthController } from '../controllers';
-import { AuthorizationMiddleware } from 'src/middlewares';
+import { AuthorizationMiddleware } from '../middlewares';
 
 const { isGuest } = new AuthorizationMiddleware();
 const { encrypt } = new PasswordMiddleware();
